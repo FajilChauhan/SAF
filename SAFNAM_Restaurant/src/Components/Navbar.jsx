@@ -6,7 +6,9 @@ const Navbar = () => {
   const navRef = useRef();
   const navigate = useNavigate();
   const [showDropdown, setShowDropdown] = useState(false);
+  const timeoutRef = useRef(null);
 
+  // Handle scroll to add dark navbar
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY >= 80) {
@@ -18,6 +20,19 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Show dropdown immediately on hover
+  const handleMouseEnter = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setShowDropdown(true);
+  };
+
+  // Hide dropdown after 300ms on leave
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setShowDropdown(false);
+    }, 300);
+  };
 
   return (
     <nav
@@ -32,7 +47,7 @@ const Navbar = () => {
         SAFNAM
       </div>
 
-      {/* Menu Items */}
+      {/* Desktop Menu */}
       <ul className="hidden md:flex gap-6 items-center text-white font-semibold text-lg">
         <li
           onClick={() => navigate("/")}
@@ -51,8 +66,8 @@ const Navbar = () => {
         {/* Booking Dropdown */}
         <li
           className="relative cursor-pointer hover:text-orange-400 transition"
-          onMouseEnter={() => setShowDropdown(true)}
-          onMouseLeave={() => setShowDropdown(false)}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
           Booking ▾
           {showDropdown && (
@@ -85,9 +100,7 @@ const Navbar = () => {
       </ul>
 
       {/* Mobile Menu Button */}
-      <div className="md:hidden text-3xl text-white cursor-pointer">
-        ☰
-      </div>
+      <div className="md:hidden text-3xl text-white cursor-pointer">☰</div>
     </nav>
   );
 };

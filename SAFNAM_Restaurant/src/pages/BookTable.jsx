@@ -38,8 +38,8 @@ const BookTable = () => {
       <Navbar />
 
       {/* --- HERO SECTION --- */}
-      <div className="hero relative h-[500px] bg-purple-900 items-center">
-        <h1 className="underline text-center text-[60px] font-bold pt-[130px] text-white">
+      <div className="hero relative h-[500px] bg-gradient-to-r from-purple-900 to-indigo-700 items-center">
+        <h1 className="underline text-orange-500 text-center text-[60px] font-bold pt-[130px]">
           Book Your Table
         </h1>
         <div className="mt-6 text-center">

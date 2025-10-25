@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../Components/Navbar";
-import PlayGameButton from "../Components/PlayGameButton";
+import PlayGameButton from "../Components/PlayGamebutton";
 import UseDiscountCheckbox from "../Components/UseDiscountCheckbox";
 import RoomData from "../data/RoomData";
 import Connect_Us from "./Connect_Us";
@@ -70,15 +70,17 @@ const BookRoom = () => {
       <Navbar />
 
       {/* HERO SECTION */}
-      <div className="hero relative h-[500px] bg-purple-900 flex flex-col justify-center items-center text-white px-[40px] text-center gap-4">
-        <h1 className="underline text-center text-[60px] font-bold">
+      <div className="hero relative h-[500px] bg-gradient-to-r from-purple-900 to-indigo-700 items-center">
+        <h1 className="underline text-orange-500 text-center text-[60px] font-bold pt-[130px]">
           Book Your Room
         </h1>
-        <p className="text-white text-[30px] mb-3">
+        <div className="mt-6 text-center">
+          <p className="text-white text-[30px] mb-3">
             Want to grab a special deal? 🎯 Play our mini-game and unlock discounts up to{" "}
             <span className="font-semibold text-orange-500">15%</span> on your booking!
           </p>
-        <PlayGameButton onDiscountEarned={(value) => setDiscount(value)} />
+          <PlayGameButton onDiscountEarned={(value) => setDiscount(value)} />
+        </div>
       </div>
 
       {/* ROOM LISTING */}

@@ -5,7 +5,7 @@ import BookOrder from './pages/BookOrder'
 import { Route, Routes } from 'react-router-dom'
 import About from './pages/About'
 import BookRoom from './pages/BookRoom'
-import PhotoRestro from './pages/photoRestro'
+import PhotoRestro from './pages/PhotoRestro'
 
 const App = () => {
   return (
