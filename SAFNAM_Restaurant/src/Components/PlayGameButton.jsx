@@ -70,9 +70,9 @@ const PlayGameButton = () => {
     const reactionTime = (Date.now() - startTime) / 1000;
     let earnedDiscount = 0;
 
-    if (reactionTime <= 1) earnedDiscount = 15;
-    else if (reactionTime <= 2) earnedDiscount = 10;
-    else if (reactionTime <= 3) earnedDiscount = 5;
+    if (reactionTime <= 0.75) earnedDiscount = 15;
+    else if (reactionTime <= 1.5) earnedDiscount = 10;
+    else if (reactionTime <= 2.5) earnedDiscount = 5;
 
     setShowGame(false);
     setGameStarted(false);
@@ -106,12 +106,12 @@ const PlayGameButton = () => {
       {/* --- GAME POPUP --- */}
       {showGame && (
         <div className="fixed inset-0 bg-black/60 flex justify-center items-center z-50">
-          <div className="relative bg-white p-6 rounded-2xl shadow-lg w-[350px] h-[350px] flex flex-col items-center justify-center text-center">
+          <div className="relative bg-white p-6 rounded-2xl shadow-lg w-[500px] h-[500px] flex flex-col items-center justify-center text-center">
             {!tapVisible && <p className="text-lg font-semibold text-gray-700">Wait for “TAP NOW!”...</p>}
             {tapVisible && (
               <button
                 onClick={handleTap}
-                className="absolute px-6 py-3 text-white font-bold rounded-full shadow-md hover:scale-110 transition-transform"
+                className="absolute px-3 py-3 text-white font-bold rounded-full shadow-md hover:scale-110 transition-transform"
                 style={tapStyle}
               >
                 TAP NOW!

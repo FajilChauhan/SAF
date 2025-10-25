@@ -1,27 +1,20 @@
 import React, { useState } from "react";
 
 const Connect_Us = () => {
-  // State to store form data
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
     subject: "",
     message: "",
   });
 
-  // Handle input change
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle submit
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // You can handle actual backend submit here later
     alert("✅ Your message has been sent successfully!");
 
-    // Clear form after submit
     setFormData({
       name: "",
       email: "",
@@ -31,79 +24,88 @@ const Connect_Us = () => {
   };
 
   return (
-    <div className="bg-purple-950 flex flex-col lg:flex-row flex-wrap px-[20px] sm:px-[40px] py-[50px] gap-[30px] text-[20px] sm:text-[24px] text-white transition-all duration-700 ease-in-out">
+    <>
       {/* CONTACT SECTION */}
-      <div className="flex-1 min-w-[250px]">
-        <h1 className="text-orange-500 font-bold text-[26px] sm:text-[30px] mb-[20px] underline">
-          Contact
-        </h1>
-        <p className="mb-[5px]">123 Street, Gandhinagar, India</p>
-        <p className="mb-[5px]">+91 8866430415</p>
-        <p>safnam_info@gmail.com</p>
+      <div className="bg-gradient-to-br from-purple-950 via-purple-900 to-indigo-900 text-white px-[20px] sm:px-[60px] py-[40px] flex flex-col lg:flex-row flex-wrap justify-center items-start gap-[50px] transition-all duration-700 ease-in-out">
+
+        {/* CONTACT INFO */}
+        <div className="flex-1 min-w-[260px]">
+          <h1 className="text-orange-400 font-extrabold text-[30px] mb-[20px] underline decoration-4 decoration-orange-500 underline-offset-4">
+            📞 Contact Us
+          </h1>
+          <p className="text-gray-200 mb-[10px]">123 Street, Gandhinagar, India</p>
+          <p className="text-gray-200 mb-[10px]">+91 8866430415</p>
+          <p className="text-gray-200">safnam_info@gmail.com</p>
+        </div>
+
+        {/* OPENING HOURS */}
+        <div className="flex-1 min-w-[260px]">
+          <h1 className="text-orange-400 font-extrabold text-[30px] mb-[20px] underline decoration-4 decoration-orange-500 underline-offset-4">
+            ⏰ Opening Hours
+          </h1>
+          <div className="text-gray-200">
+            <p>Monday - Saturday</p>
+            <p className="mb-[15px]">11:30 AM - 10:00 PM</p>
+            <p>Sunday</p>
+            <p>11:00 AM - 11:00 PM</p>
+          </div>
+        </div>
+
+        {/* COMPLAIN FORM */}
+        <div className="flex-1 min-w-[300px] max-w-[480px]">
+          <h1 className="text-orange-400 font-extrabold text-[30px] mb-[25px] underline decoration-4 decoration-orange-500 underline-offset-4">
+            📝 Complain
+          </h1>
+
+          <form onSubmit={handleSubmit} className="flex flex-col gap-[15px]">
+            <input
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              type="text"
+              placeholder="Your Name"
+              required
+              className="w-full py-[10px] border border-orange-400 bg-transparent rounded-[6px] px-[12px] text-white placeholder-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-400 outline-none transition-all duration-300"
+            />
+            <input
+              name="subject"
+              value={formData.subject}
+              onChange={handleChange}
+              type="text"
+              placeholder="Subject"
+              className="w-full py-[10px] border border-orange-400 bg-transparent rounded-[6px] px-[12px] text-white placeholder-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-400 outline-none transition-all duration-300"
+            />
+            <textarea
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              placeholder="Your Message (In This Write Fully With Description)"
+              required
+              className="w-full h-[100px] border border-orange-400 bg-transparent rounded-[6px] px-[12px] py-[10px] text-white placeholder-gray-300 resize-none focus:border-orange-500 focus:ring-2 focus:ring-orange-400 outline-none transition-all duration-300"
+            ></textarea>
+
+            <button
+              type="submit"
+              className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold text-[20px] py-[12px] rounded-[8px] shadow-lg shadow-orange-400/40 transition-all duration-500 hover:scale-[1.03]"
+            >
+              🚀 Send Message
+            </button>
+          </form>
+        </div>
       </div>
 
-      {/* OPENING SECTION */}
-      <div className="flex-1 min-w-[250px]">
-        <h1 className="text-orange-500 font-bold text-[26px] sm:text-[30px] mb-[20px] underline">
-          Opening
-        </h1>
-        <p>Monday - Saturday</p>
-        <p className="mb-[10px]">11:30 AM - 10 PM</p>
-        <p>Sunday</p>
-        <p>11 AM - 11 PM</p>
-      </div>
-
-      {/* COMPLAIN FORM */}
-      <div className="flex-1 min-w-[400px] max-w-[500px] text-white">
-        <h1 className="text-orange-500 font-bold text-[26px] sm:text-[30px] mb-[20px] underline">
-          Complain
-        </h1>
-
-        <form onSubmit={handleSubmit}>
-          <input
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            className="w-full py-[8px] border-2 border-orange-400 mb-[15px] rounded-[5px] px-[10px] text-white outline-none"
-            type="text"
-            placeholder="Your Name"
-            required
-          />
-          <input
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className="w-full py-[8px] border-2 border-orange-400 mb-[15px] rounded-[5px] px-[10px] text-white outline-none"
-            type="email"
-            placeholder="Your Email"
-            required
-          />
-          <input
-            name="subject"
-            value={formData.subject}
-            onChange={handleChange}
-            className="w-full py-[8px] border-2 border-orange-400 mb-[15px] rounded-[5px] px-[10px] text-white outline-none"
-            type="text"
-            placeholder="Subject"
-          />
-          <textarea
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            className="w-full py-[8px] border-2 border-orange-400 mb-[20px] rounded-[5px] px-[10px] text-white outline-none resize-none h-[100px]"
-            placeholder="Message"
-            required
-          ></textarea>
-
-          <button
-            type="submit"
-            className="w-full bg-orange-400 font-bold text-[24px] sm:text-[30px] rounded-[6px] py-[10px] hover:bg-orange-500 transition-all duration-500 cursor-pointer"
-          >
-            Send Message
-          </button>
-        </form>
-      </div>
-    </div>
+      {/* FOOTER */}
+      <footer className="bg-purple-950 text-white py-[40px] text-center border-t border-purple-800">
+        <p className="text-[18px] mb-2 tracking-wide">
+          © {new Date().getFullYear()}{" "}
+          <span className="font-bold text-orange-400">SAFNAM</span>. All rights reserved.
+        </p>
+        <p className="text-[15px] text-gray-300">
+          Designed with ❤️ by{" "}
+          <span className="font-semibold text-orange-300">Fajil</span>
+        </p>
+      </footer>
+    </>
   );
 };
 

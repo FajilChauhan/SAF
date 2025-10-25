@@ -5,6 +5,7 @@ import BookOrder from './pages/BookOrder'
 import { Route, Routes } from 'react-router-dom'
 import About from './pages/About'
 import BookRoom from './pages/BookRoom'
+import PhotoRestro from './pages/photoRestro'
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Route path='/booktable' element={<BookTable/>}/>
         <Route path='/bookorder' element={<BookOrder/>}/>
         <Route path='/bookroom' element={<BookRoom/>}/>
+        <Route path='/photos' element={<PhotoRestro/>}/>
       </Routes>
     </div>
   )
