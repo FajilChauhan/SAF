@@ -2,7 +2,7 @@ import React, { useState, useEffect} from "react";
 import orderData from "../data/orderData";
 import Navbar from "../Components/Navbar";
 import Connect_Us from "./Connect_Us";
-import PlayGameButton from "../Components/PlayGamebutton";
+import PlayGameButton from "../Components/PlayGameButton";
 import UseDiscountCheckbox from "../Components/UseDiscountCheckbox";
 
 const BookOrder = () => {

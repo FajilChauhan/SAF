@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Navbar from '../Components/Navbar';
-import PlayGameButton from "../Components/PlayGamebutton";
+import PlayGameButton from "../Components/PlayGameButton";
 import UseDiscountCheckbox from "../Components/UseDiscountCheckbox";
 import Connect_Us from './Connect_Us';
 import tables from "../data/table";
