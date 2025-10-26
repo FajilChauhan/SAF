@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Clock, CalendarDays, UtensilsCrossed, PartyPopper } from "lucide-react";
 import Navbar from '../Components/Navbar';
 import PlayGameButton from "../Components/PlayGameButton";
 import UseDiscountCheckbox from "../Components/UseDiscountCheckbox";
@@ -13,20 +14,27 @@ const BookTable = () => {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
-    email: "",
+    time: "",
   });
 
   const floors = ["Ground Floor", "1st Floor", "2nd Floor", "Rooftop"];
 
-  const handleTableClick = (id) => setSelectedTable(id);
+  const handleTableClick = (table) => {
+    if (!table.booked) setSelectedTable(table.id);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(`✅ Booking Confirmed! ${discount ? `(${discount}% OFF Applied)` : ""}`);
+    if (!formData.time) {
+      alert("⏰ Please select a reservation time before confirming!");
+      return;
+    }
+
+    alert(`✅ Booking Confirmed for ${formData.time}! ${discount ? `(${discount}% OFF Applied)` : ""}\n⚠️ Please arrive within 15 minutes of your selected time.`);
     setShowForm(false);
     setSelectedTable(null);
     setDiscount(0);
-    setFormData({ name: "", phone: "", email: "" });
+    setFormData({ name: "", phone: "", time: "" });
   };
 
   const handleChange = (e) => {
@@ -38,17 +46,24 @@ const BookTable = () => {
       <Navbar />
 
       {/* --- HERO SECTION --- */}
-      <div className="hero relative h-[500px] bg-gradient-to-r from-purple-900 to-indigo-700 items-center">
-        <h1 className="underline text-orange-500 text-center text-[60px] font-bold pt-[130px]">
+      <div className="hero relative h-[500px] bg-gradient-to-r from-purple-900 to-indigo-700 flex flex-col justify-center items-center text-center text-white">
+        <h1 className="underline text-orange-500 text-[60px] font-bold mb-4">
           Book Your Table
         </h1>
-        <div className="mt-6 text-center">
-          <p className="text-white text-[30px] mb-3">
-            Want to grab a special deal? 🎯 Play our mini-game and unlock discounts up to{" "}
-            <span className="font-semibold text-orange-500">15%</span> on your booking!
-          </p>
-          <PlayGameButton onDiscountEarned={(value) => setDiscount(value)} />
+        <div className="flex justify-center items-center gap-6 text-orange-300 mb-4">
+          <CalendarDays size={38} />
+          <UtensilsCrossed size={38} />
+          <PartyPopper size={38} />
+          <Clock size={38} />
         </div>
+        <p className="text-white text-[26px] mb-4 max-w-3xl">
+          Make your dining special — reserve your favorite spot and enjoy a great meal with us 🍽️
+        </p>
+        <p className="text-white text-[22px] mb-4">
+          🎯 Want to grab a special deal? Play our mini-game and unlock discounts up to{" "}
+          <span className="font-semibold text-orange-400">15%</span> on your booking!
+        </p>
+        <PlayGameButton onDiscountEarned={(value) => setDiscount(value)} />
       </div>
 
       {/* --- MAIN SECTION --- */}
@@ -110,15 +125,23 @@ const BookTable = () => {
                 .map((table) => (
                   <div
                     key={table.id}
-                    onClick={() => handleTableClick(table.id)}
-                    className={`relative w-24 h-24 flex items-center justify-center rounded-xl text-lg font-semibold cursor-pointer border transition-all duration-300 ${
-                      selectedTable === table.id
-                        ? "bg-orange-400 border-orange-500 scale-105 text-white font-bold"
-                        : "bg-gray-100 text-gray-500 border-gray-200"
-                    }`}
+                    onClick={() => handleTableClick(table)}
+                    className={`relative w-24 h-24 flex items-center justify-center rounded-xl text-lg font-semibold border transition-all duration-300 
+                      ${
+                        table.booked
+                          ? "bg-gray-300 text-gray-400 border-gray-300 cursor-not-allowed opacity-60"
+                          : selectedTable === table.id
+                          ? "bg-orange-400 border-orange-500 scale-105 text-white font-bold"
+                          : "bg-gray-100 text-gray-600 border-gray-200 hover:border-orange-400 hover:scale-105 cursor-pointer"
+                      }`}
                   >
                     {table.id}
-                    {selectedTable === table.id && (
+                    {table.booked && (
+                      <span className="absolute top-2 right-2 bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded">
+                        Booked
+                      </span>
+                    )}
+                    {selectedTable === table.id && !table.booked && (
                       <span className="absolute top-2 right-2 w-3 h-3 rounded-full border border-black bg-white"></span>
                     )}
                   </div>
@@ -172,18 +195,22 @@ const BookTable = () => {
                 className="w-full border rounded px-3 py-2 mb-3"
               />
               <input
-                name="email"
+                type="time"
+                name="time"
                 onChange={handleChange}
-                value={formData.email}
-                placeholder="Email"
+                value={formData.time}
                 required
                 className="w-full border rounded px-3 py-2 mb-3"
               />
 
-              {/* Discount Checkbox */}
+              <div className="text-[14px] text-red-600 mb-4">
+                ⚠️ Note: If you don’t arrive within{" "}
+                <span className="font-semibold">15 minutes</span> of your selected
+                time, your booking will be automatically cancelled.
+              </div>
+
               <UseDiscountCheckbox onDiscountApply={(val) => setDiscount(val)} />
 
-              {/* Buttons */}
               <div className="flex justify-between mt-6">
                 <button
                   type="button"
