@@ -16,16 +16,11 @@ const UseDiscountCheckbox = ({ onDiscountApply }) => {
     const checked = e.target.checked;
     setUseDiscount(checked);
 
-    if (checked && discountData && !discountData.used) {
-      // Apply discount to parent form
+    if (checked && discountData) {
+      // ✅ Apply discount temporarily
       onDiscountApply(discountData.discount);
-
-      // Mark discount as used
-      const updated = { ...discountData, used: true };
-      localStorage.setItem("gameDiscount", JSON.stringify(updated));
-      setDiscountData(updated);
-    } else if (!checked) {
-      // Remove discount
+    } else {
+      // 🚫 Remove discount if unticked
       onDiscountApply(0);
     }
   };

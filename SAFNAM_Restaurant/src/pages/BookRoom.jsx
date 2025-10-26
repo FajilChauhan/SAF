@@ -27,24 +27,41 @@ const BookRoom = () => {
   };
 
   const handleBooking = (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (formData.checkout < formData.checkin) {
-      alert("❌ Check-out date cannot be before check-in date!");
-      return;
-    }
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // set to midnight (ignore time part)
 
-    alert(`✅ Booking Confirmed! ${discount ? `(${discount}% OFF Applied)` : ""}`);
-    setSelectedRoom(null);
-    setFormData({
-      name: "",
-      phone: "",
-      checkin: "",
-      checkout: "",
-      rooms: 1,
-    });
-    setDiscount(0);
-  };
+  const checkinDate = new Date(formData.checkin);
+  const checkoutDate = new Date(formData.checkout);
+
+  // 🛑 Validation 1: check-in before today
+  if (checkinDate < today) {
+    alert("⚠️ Check-in date cannot be before today's date!");
+    return;
+  }
+
+  // 🛑 Validation 2: checkout before check-in
+  if (checkoutDate < checkinDate) {
+    alert("❌ Check-out date cannot be before check-in date!");
+    return;
+  }
+
+  // ✅ If all good
+  alert(`✅ Booking Confirmed! ${discount ? `(${discount}% OFF Applied)` : ""}`);
+
+  // Reset form
+  setSelectedRoom(null);
+  setFormData({
+    name: "",
+    phone: "",
+    checkin: "",
+    checkout: "",
+    rooms: 1,
+  });
+  setDiscount(0);
+};
+
 
   return (
     <>
@@ -172,7 +189,7 @@ const BookRoom = () => {
                 </label>
 
                 <label className="font-medium w-1/2 flex flex-col gap-1">
-                  <p className="flex gap-2 items-center"><CalendarDays size={18} /> Check-in</p>
+                  <p className="flex gap-2 items-center"><CalendarDays size={18} /> Check-Out</p>
                   <input
                     type="date"
                     name="checkout"

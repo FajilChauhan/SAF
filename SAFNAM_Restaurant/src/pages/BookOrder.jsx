@@ -38,20 +38,9 @@ const BookOrder = () => {
     });
   };
 
-  // --- Validate Address ---
-  const isAddressValid = () => {
-    if (!formData.address.toLowerCase().includes("km")) {
-      alert("⚠️ Address must be within 10 km!");
-      return false;
-    }
-    return true;
-  };
-
   // --- Submit Form ---
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!isAddressValid()) return;
-
     console.log("Order Details:", formData);
     alert(`✅ Order Placed Successfully! ${discount ? `(${discount}% OFF Applied)` : ""}`);
     setShowForm(false);
